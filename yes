@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yay! I Love You Too!</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url(bear.webp); /* New background after clicking Yes */
+      background-size: contain;
+      background-position: center;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 10px;
+    }
+    h1 {
+      font-size: 48px;
+      color: #ffdd57;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Yayyyy! I Love You Too! 💖</h1>
+  </div>
+</body>
+</html>
