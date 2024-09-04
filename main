@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will you be with me forever?</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url(giphy.webp); /* Your cute background picture */
+      background-size: contain;
+      background-position: center;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+      transition: background-image 0.5s ease;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    #yes-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #no-btn {
+      background-color: #FF0000;
+      color: white;
+      position: absolute;
+    }
+    #yay-message {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Do you want to be with me forever? Mr. Goran 🧐️</h1>
+    <button class="button button-yes" onclick="goToNextPage()">❤️ Yes</button>
+
+    <button id="no-btn">No</button>
+
+  </div>
+
+  <script>
+    // Yes Button Click Action
+    function goToNextPage() {
+  window.location.href = "yes.html";  // Redirects to the success page
+}
+
+
+    // Function to move the No button on touch or hover
+    function moveNoButton() {
+      const noBtn = document.getElementById('no-btn');
+      const x = Math.floor(Math.random() * (window.innerWidth - noBtn.clientWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - noBtn.clientHeight));
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+
+    // For touch devices (mobile) and mouse hover
+    document.getElementById('no-btn').ontouchstart = moveNoButton;
+    document.getElementById('no-btn').onmouseover = moveNoButton;
+  </script>
+</body>
+</html>
