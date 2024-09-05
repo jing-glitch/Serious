@@ -1,81 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Will you be with me forever? Mr. Goran 🧐🤨</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url(giphy.webp); /* Your cute background picture */
-      background-size: contain;
-      background-position: center;
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      color: #fff;
-      text-align: center;
-      transition: background-image 0.5s ease;
-    }
-    .container {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 20px;
-      margin: 20px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-    #yes-btn {
-      background-color: #4CAF50;
-      color: white;
-    }
-    #no-btn {
-      background-color: #FF0000;
-      color: white;
-      position: absolute;
-    }
-    #yay-message {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Text with Buttons</title>
+    <style>
+        /* Split the page into two equal columns */
+        .container {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for the left (image) side */
+        .left {
+            width: 50%;
+            background-image: url('gogo.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Style for the right (text) side */
+        .right {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            position: relative;
+        }
+
+        /* Initially hidden hover text */
+        .hidden-text {
+            display: none;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Style for the main text */
+        .main-text {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        /* Style when hovering over the main text */
+        .main-text:hover {
+            color: #007BFF; /* Change text color on hover */
+        }
+
+        /* Popup question box */
+        .popup-question {
+            display: none;
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Style for the buttons */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        /* Yes button (pink) */
+        #yes-button {
+            background-color: pink;
+            border: 2px solid pink;
+        }
+
+        /* No button (red) */
+        #no-button {
+            background-color: red;
+            border: 2px solid red;
+            color: white;
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                width: 100%;
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Do you want to be with me forever? Mr. Goran 🧐️</h1>
-    <button class="button button-yes" onclick="goToNextPage()">❤️ Yes</button>
 
-    <button id="no-btn">No</button>
+<div class="container">
+    <!-- Left side with image -->
+    <div class="left"></div>
 
-  </div>
+    <!-- Right side with text -->
+    <div class="right">
+        <div>
+            <!-- Main text that triggers the sequence -->
+            <div class="main-text" id="main-text">OH! Mr. Goran! 😍.</div>
+            <!-- Sequential hidden texts -->
+            <div class="hidden-text" id="text1">You look so Handsome 😏</div>
+            <div class="hidden-text" id="text2">And I think I love you 🫣so Let me ask you a question 🫢</div>
+            <div class="popup-question" id="text3">Do you wanna be with me forever?🙄🧐</div>
 
-  <script>
-    // Yes Button Click Action
-    function goToNextPage() {
-  window.location.href = "yes.html";  // Redirects to the success page
-}
+            <!-- Yes and No buttons -->
+            <div id="buttons" style="display:none; margin-top: 20px;">
+                <button id="yes-button" class="button">Yes🩷</button>
+                <button id="no-button" class="button">No🤡</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    let sequenceStarted = false; // Flag to track if the sequence has already started
 
-    // Function to move the No button on touch or hover
-    function moveNoButton() {
-      const noBtn = document.getElementById('no-btn');
-      const x = Math.floor(Math.random() * (window.innerWidth - noBtn.clientWidth));
-      const y = Math.floor(Math.random() * (window.innerHeight - noBtn.clientHeight));
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
+    // Get the elements
+    const mainText = document.getElementById('main-text');
+    const text1 = document.getElementById('text1');
+    const text2 = document.getElementById('text2');
+    const text3 = document.getElementById('text3');
+    const buttons = document.getElementById('buttons');
+    const noButton = document.getElementById('no-button');
+    const yesButton = document.getElementById('yes-button');
+
+    let timeout1, timeout2, timeout3, timeoutButtons, timeoutHide;
+
+    // Function to show the sequential texts
+    function showTextSequence() {
+        if (sequenceStarted) return; // If the sequence has already started, do not run again
+        sequenceStarted = true; // Set the flag to true once the sequence starts
+
+        // Show the first text
+        text1.style.display = 'block';
+
+        // Show the second text after 3 seconds (increase the time here for reading)
+        timeout1 = setTimeout(() => {
+            text2.style.display = 'block';
+        }, 3000); // 3 seconds delay to read the first text
+
+        // Show the third text (the question) after 6 seconds
+        timeout2 = setTimeout(() => {
+            text3.style.display = 'block';
+        }, 6000); // 6 seconds delay to read the second text
+
+        // Show the buttons after 8 seconds
+        timeoutButtons = setTimeout(() => {
+            buttons.style.display = 'block';
+        }, 8000); // 8 seconds delay to show buttons
+
+        // Hide the first two texts and "Tap or hover" text after 8 seconds
+        timeoutHide = setTimeout(hideTextSequence, 8000); // Keep the third text and buttons
     }
 
+    // Function to hide the first two texts, main text, but keep the third question and buttons visible
+    function hideTextSequence() {
+        mainText.style.display = 'none'; // Hide the "Tap or hover over me" text
+        text1.style.display = 'none';    // Hide the first text
+        text2.style.display = 'none';    // Hide the second text
+        text3.style.display = 'block';   // Ensure the third question remains visible
+        buttons.style.display = 'block'; // Ensure the buttons remain visible
+    }
 
-    // For touch devices (mobile) and mouse hover
-    document.getElementById('no-btn').ontouchstart = moveNoButton;
-    document.getElementById('no-btn').onmouseover = moveNoButton;
-  </script>
+    // Event listeners for desktop hover and mobile touch
+    mainText.addEventListener('mouseenter', showTextSequence);
+    mainText.addEventListener('click', showTextSequence); // Enable click for easier interaction
+    mainText.addEventListener('touchstart', function(e) {
+        e.preventDefault(); // Prevent default touch behavior
+        showTextSequence();
+    });
+
+    // Move the "No" button around randomly
+    noButton.addEventListener('mouseenter', function() {
+        const randomX = Math.floor(Math.random() * 300) + 1; // Random X position
+        const randomY = Math.floor(Math.random() * 300) + 1; // Random Y position
+        noButton.style.position = 'absolute';
+        noButton.style.top = randomY + 'px';
+        noButton.style.left = randomX + 'px';
+    });
+
+    // Function when "Yes" is clicked (for example, you can add any action here)
+    yesButton.addEventListener('click', function() {
+        window.location.href = 'yes.html';
+    });
+</script>
+
 </body>
 </html>
+
