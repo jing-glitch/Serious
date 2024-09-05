@@ -1,37 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yay! I Love You ! We be together forever! You stuck with me😛</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url(bear.webp); /* New background after clicking Yes */
-      background-size: contain;
-      background-position: center;
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      color: #fff;
-      text-align: center;
-    }
-    .container {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 10px;
-    }
-    h1 {
-      font-size: 48px;
-      color: #ffdd57;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page with GIF</title>
+    <style>
+        /* Split the page into two equal columns */
+        .container {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for the left (text) side */
+        .left {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            padding: 20px;
+        }
+
+        /* Style for the right (GIF) side */
+        .right {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+        }
+
+        /* Style for the GIF */
+        .gif {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                width: 100%;
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Yay! I Love You ! We be together forever! You stuck with me😛💖</h1>
-  </div>
+
+<div class="container">
+    <!-- Left side with text -->
+    <div class="left">
+        <div>
+            <h1>Well... I guess you don't have choices...</h1>
+            <p>Sorry to say 😭but you stuck with me FOREVER!!! 😌 </p>
+        </div>
+    </div>
+
+    <!-- Right side with GIF -->
+    <div class="right">
+        <img src="giphy-2.webp" alt="Animated GIF" class="gif"> <!-- Replace 'your-gif.gif' with the path to your GIF -->
+    </div>
+</div>
+
 </body>
 </html>
+
+
